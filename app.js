@@ -65,3 +65,44 @@
 // fetch("https://dummyjson.com/recipes")
 //   .then((res) => res.json())
 //   .then(console.log);
+
+// const dataFromServer = async () => {
+//   const data = {
+//     id: 1,
+//     name: "Maid",
+//   };
+//   return data;
+// };
+
+// // const showData = async () => {
+// //   try {
+// //     const response = await fetch("https://fakestoreapi.com/products");
+// //     const data = await response.json();
+// //     console.log(data);
+// //   } catch (error) {
+// //     console.log(error);
+// //   }
+// // };
+
+const getData = async () => {
+  try {
+    const response = await fetch("https://fakestoreapi.com/products?limit=5");
+    const data = await response.json();
+    const productlist = document.getElementById("container");
+    data.forEach((product) => {
+      const productElements = document.createElement("div");
+      productElements.innerHTML = `<h1>${product.title}</h1>`;
+      productlist.appendChild(productElements);
+      productElements.innerHTML = `<h1>${product.price}</h1>`;
+      productElements.innerHTML = `<h1>${product.category}</h1>`;
+      productElements.innerHTML = `<h1>${product.description}</h1>;`;
+      productElements.innerHTML = `<img src=${product.image}  />;`;
+    });
+
+    // console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+getData();
